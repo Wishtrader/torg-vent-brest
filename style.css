@@ -1,0 +1,10 @@
+.main-button {
+	background: #C9DAFB;
+	background: linear-gradient(135deg, rgba(201, 218, 251, 1) 0%, rgba(57, 122, 210, 1) 40%, rgba(57, 122, 210, 1) 60%, rgba(201, 218, 251, 1) 100%);
+	transition: all 0.3s ease-in-out;
+}
+
+.main-button:hover {
+	background: #ffffff;
+	background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(106, 152, 217, 1) 40%, rgba(106, 152, 217, 1) 60%, rgba(255, 255, 255, 1) 100%);
+}
