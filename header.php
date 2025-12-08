@@ -98,7 +98,7 @@
                 } else {
                     ?>
                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="text-[18px] font-bold text-primary no-underline">
-                        <p class="font-bold text-[16px] md:text-[18px] text-primary uppercase leading-tight">БрестКлимат<br><span class="text-sm text-gray-600 font-normal normal-case">климатическая техника</span></p>
+                        <p class="font-bold text-[16px] md:text-[18px] text-primary leading-tight">БрестКлимат.Бай</p>
                     </a>
                     <?php
                 }
