@@ -390,14 +390,51 @@ get_header();
     <!-- Brands Section -->
     <section class="py-12 bg-gray-50 border-t border-gray-200">
         <div class="container mx-auto px-4 max-w-[1240px]">
-            <h2 class="text-xl font-bold text-center text-gray-800 mb-8">Бренды, с которыми мы работаем</h2>
+            <?php
+            $brands_title = function_exists('get_field') ? get_field('home_brands_title') : '';
+            if(!$brands_title) $brands_title = 'Бренды, с которыми мы работаем';
+            
+            // Collect brands from individual fields
+            $brands_list = array();
+            for ($i = 1; $i <= 10; $i++) {
+                $logo = function_exists('get_field') ? get_field('brand_logo_' . $i) : null;
+                $name = function_exists('get_field') ? get_field('brand_name_' . $i) : '';
+                
+                if ($logo && is_array($logo) && !empty($logo['url'])) {
+                    $brands_list[] = array(
+                        'logo' => $logo,
+                        'name' => $name ? $name : 'Brand ' . $i
+                    );
+                }
+            }
+            
+            // Fallback if empty
+            if (empty($brands_list)) {
+                $brands_list = array(
+                    array('logo' => array('url' => 'https://placehold.co/100x40/e5e7eb/6b7280?text=LG'), 'name' => 'LG'),
+                    array('logo' => array('url' => 'https://placehold.co/100x40/e5e7eb/6b7280?text=MDV'), 'name' => 'MDV'),
+                    array('logo' => array('url' => 'https://placehold.co/120x40/e5e7eb/6b7280?text=Electrolux'), 'name' => 'Electrolux'),
+                    array('logo' => array('url' => 'https://placehold.co/100x40/e5e7eb/6b7280?text=Mitsubishi'), 'name' => 'Mitsubishi'),
+                    array('logo' => array('url' => 'https://placehold.co/100x40/e5e7eb/6b7280?text=Ballu'), 'name' => 'Ballu'),
+                    array('logo' => array('url' => 'https://placehold.co/80x40/e5e7eb/6b7280?text=TCL'), 'name' => 'TCL'),
+                );
+            }
+            ?>
+            
+            <h2 class="text-xl font-bold text-center text-gray-800 mb-8"><?php echo esc_html($brands_title); ?></h2>
             <div class="flex flex-wrap justify-center items-center gap-8 lg:gap-12 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-                <img src="https://placehold.co/100x40/e5e7eb/6b7280?text=LG" alt="LG" class="h-8 lg:h-10 object-contain">
-                <img src="https://placehold.co/100x40/e5e7eb/6b7280?text=MDV" alt="MDV" class="h-8 lg:h-10 object-contain">
-                <img src="https://placehold.co/120x40/e5e7eb/6b7280?text=Electrolux" alt="Electrolux" class="h-8 lg:h-10 object-contain">
-                <img src="https://placehold.co/100x40/e5e7eb/6b7280?text=Cooper" alt="Cooper&Hunter" class="h-8 lg:h-10 object-contain">
-                <img src="https://placehold.co/100x40/e5e7eb/6b7280?text=Ballu" alt="Ballu" class="h-8 lg:h-10 object-contain">
-                <img src="https://placehold.co/80x40/e5e7eb/6b7280?text=TCL" alt="TCL" class="h-8 lg:h-10 object-contain">
+                <?php foreach($brands_list as $brand): 
+                    $logo = is_array($brand) && isset($brand['logo']) ? $brand['logo'] : null;
+                    $name = is_array($brand) && isset($brand['name']) ? $brand['name'] : 'Brand';
+                    $logo_url = $logo && is_array($logo) ? $logo['url'] : '';
+                    
+                    if($logo_url):
+                ?>
+                    <img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr($name); ?>" class="h-8 lg:h-10 object-contain">
+                <?php 
+                    endif;
+                endforeach; 
+                ?>
             </div>
         </div>
     </section>

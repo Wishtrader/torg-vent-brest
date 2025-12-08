@@ -1223,3 +1223,55 @@ function tvb_home_faq_acf_init() {
     ));
 }
 
+/**
+ * Register Home Page Brands Fields
+ */
+add_action('acf/init', 'tvb_home_brands_acf_init');
+function tvb_home_brands_acf_init() {
+    $fields = array(
+        array(
+            'key' => 'field_home_brands_title',
+            'label' => 'Заголовок секции',
+            'name' => 'home_brands_title',
+            'type' => 'text',
+            'default_value' => 'Бренды, с которыми мы работаем',
+        ),
+    );
+    
+    // Add 10 brand logo fields
+    for ($i = 1; $i <= 10; $i++) {
+        $fields[] = array(
+            'key' => 'field_brand_logo_' . $i,
+            'label' => 'Бренд ' . $i . ' - Логотип',
+            'name' => 'brand_logo_' . $i,
+            'type' => 'image',
+            'return_format' => 'array',
+            'preview_size' => 'thumbnail',
+            'library' => 'all',
+        );
+        $fields[] = array(
+            'key' => 'field_brand_name_' . $i,
+            'label' => 'Бренд ' . $i . ' - Название (alt)',
+            'name' => 'brand_name_' . $i,
+            'type' => 'text',
+            'placeholder' => 'Например: LG',
+        );
+    }
+    
+    acf_add_local_field_group(array(
+        'key' => 'group_home_brands',
+        'title' => 'Бренды на Главной',
+        'fields' => $fields,
+        'location' => array(
+            array(
+                array(
+                    'param' => 'page_type',
+                    'operator' => '==',
+                    'value' => 'front_page',
+                ),
+            ),
+        ),
+    ));
+}
+
+
