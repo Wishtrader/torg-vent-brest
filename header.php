@@ -159,6 +159,7 @@
                 </a>
 
                 <?php if (is_user_logged_in()) : ?>
+                    <a href="<?php echo esc_url(wp_logout_url(home_url())); ?>" class="hidden sm:block text-[14px] text-gray-500 hover:text-red-500 transition mr-2 font-medium">Выход</a>
                     <a href="<?php echo home_url('/account'); ?>" class="flex items-center gap-2 text-gray-700 font-medium hover:text-primary transition no-underline" title="Личный кабинет">
                         <i class="fa-regular fa-user text-xl"></i>
                     </a>

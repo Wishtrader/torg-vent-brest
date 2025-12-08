@@ -156,7 +156,7 @@ document.addEventListener('click', function(e) {
     const formData = new FormData();
     formData.append('action', 'toggle_favorite');
     formData.append('product_id', productId);
-    formData.append('nonce', '<?php echo wp_create_nonce('favorite_nonce'); ?>');
+    formData.append('nonce', torg_config.favorite_nonce);
     
     // Optimistic UI update
     if (icon.classList.contains('fa-solid')) {
@@ -203,7 +203,7 @@ document.addEventListener('click', function(e) {
     formData.append('action', 'add_to_cart');
     formData.append('product_id', productId);
     formData.append('quantity', 1);
-    formData.append('nonce', '<?php echo wp_create_nonce('cart_nonce'); ?>');
+    formData.append('nonce', torg_config.cart_nonce);
     
     fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
         method: 'POST',

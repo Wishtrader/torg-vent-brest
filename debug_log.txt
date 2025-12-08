@@ -1,0 +1,99 @@
+--- ADD TO CART ---
+Time: 2025-12-08 22:39:16
+User ID: 1
+Logged In: Yes
+POST: Array
+(
+    [action] => add_to_cart
+    [product_id] => 35
+    [quantity] => 1
+    [nonce] => ea2399ae30
+)
+Nonce provided: ea2399ae30
+Nonce Verify Result: FAIL
+Error: Security Error (Nonce Fail)
+--- ADD TO CART ---
+Time: 2025-12-08 22:39:31
+User ID: 1
+Logged In: Yes
+POST: Array
+(
+    [action] => add_to_cart
+    [product_id] => 35
+    [quantity] => 1
+    [nonce] => ea2399ae30
+)
+Nonce provided: ea2399ae30
+Nonce Verify Result: FAIL
+Error: Security Error (Nonce Fail)
+--- ADD TO CART ---
+Time: 2025-12-08 22:40:07
+User ID: 1
+Logged In: Yes
+POST: Array
+(
+    [action] => add_to_cart
+    [product_id] => 35
+    [quantity] => 1
+    [nonce] => ea2399ae30
+)
+Nonce provided: ea2399ae30
+Nonce Verify Result: FAIL
+Error: Security Error (Nonce Fail)
+--- ADD TO CART ---
+Time: 2025-12-08 22:41:43
+User ID: 1
+Logged In: Yes
+POST: Array
+(
+    [action] => add_to_cart
+    [product_id] => 35
+    [quantity] => 1
+    [nonce] => ea2399ae30
+)
+Nonce provided: ea2399ae30
+Expected: 31268d776c
+Nonce Verify Result: FAIL
+Error: Security Error (Nonce Fail)
+--- ADD TO CART ---
+Time: 2025-12-08 22:44:37
+User ID: 4
+Logged In: Yes
+POST: Array
+(
+    [action] => add_to_cart
+    [product_id] => 35
+    [quantity] => 1
+    [nonce] => f37f84d58c
+)
+Nonce provided: f37f84d58c
+Expected: f37f84d58c
+Nonce Verify Result: PASS
+--- ADD TO CART ---
+Time: 2025-12-08 22:44:59
+User ID: 4
+Logged In: Yes
+POST: Array
+(
+    [action] => add_to_cart
+    [product_id] => 86
+    [quantity] => 1
+    [nonce] => f37f84d58c
+)
+Nonce provided: f37f84d58c
+Expected: f37f84d58c
+Nonce Verify Result: PASS
+--- ADD TO CART ---
+Time: 2025-12-08 22:45:14
+User ID: 4
+Logged In: Yes
+POST: Array
+(
+    [action] => add_to_cart
+    [product_id] => 86
+    [quantity] => 1
+    [nonce] => f37f84d58c
+)
+Nonce provided: f37f84d58c
+Expected: f37f84d58c
+Nonce Verify Result: PASS
