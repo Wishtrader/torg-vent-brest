@@ -38,6 +38,7 @@ get_header();
                         $product_price = get_field('product_price');
                         $product_old_price = get_field('product_old_price');
                         $is_on_sale = get_field('is_on_sale'); // ACF field for sale status
+                        $is_new = get_field('is_new'); // ACF field for new product status
                         
                         // Calculate discount percentage
                         $discount_percent = 0;
@@ -48,18 +49,19 @@ get_header();
                         <!-- Product Card -->
                         <div class="relative bg-white sm:min-h-[460px] sm:min-w-[282px] rounded-lg p-4 shadow-sm hover:shadow-md border border-gray-100 transition flex flex-col relative group">
                             
-                            <!-- Sale Badge -->
-                            <?php if ($is_on_sale && $discount_percent > 0) : ?>
+                            <!-- Badge (New takes priority over Sale) -->
+                            <?php if ($is_new) : ?>
+                                <span class="absolute top-4 left-4 bg-red-500 text-white text-[10px] font-bold z-10 px-3 py-1.5 rounded">НОВИНКА</span>
+                            <?php elseif ($is_on_sale && $discount_percent > 0) : ?>
                                 <span class="absolute top-4 left-4 bg-[#FF972F] text-white text-[10px] z-10 w-[70px] h-[23px] flex items-center justify-center">-<?php echo $discount_percent; ?>%</span>
                             <?php elseif ($is_on_sale) : ?>
                                 <span class="absolute top-4 left-4 bg-[#FF972F] text-white text-[10px] z-10 w-[70px] h-[23px] flex items-center justify-center">АКЦИЯ</span>
                             <?php endif; ?>
                             
                             <!-- Favorite Icon -->
-                            <!-- Favorite Icon -->
                             <?php $is_fav = in_array(get_the_ID(), $favorites); ?>
-                            <button class="favorite-btn absolute top-4 right-4 transition z-10 hover:text-red-500 text-gray-300" data-product-id="<?php the_ID(); ?>">
-                                <i class="<?php echo $is_fav ? 'fa-solid text-red-500' : 'fa-regular'; ?> fa-heart text-xl"></i>
+                            <button class="favorite-btn absolute top-4 right-4 transition z-10 hover:text-red-500 <?php echo $is_fav ? 'text-red-500' : 'text-gray-300'; ?>" data-product-id="<?php the_ID(); ?>">
+                                <i class="<?php echo $is_fav ? 'fa-solid' : 'fa-regular'; ?> fa-heart text-xl"></i>
                             </button>
                             
                             <!-- Product Image -->
@@ -90,7 +92,7 @@ get_header();
                                 <?php endif; ?>
                                 
                             </div>
-														<button class="absolute bottom-[20px] left-[20px] right-[20px] w-[242px] sm:h-[46px] bg-primary hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition text-sm sm:text-[16px] add-to-cart-btn" data-product-id="<?php echo get_the_ID(); ?>">В КОРЗИНУ
+														<button class="absolute bottom-[20px] left-[20px] right-[20px] h-[44px] sm:h-[46px] bg-primary hover:bg-blue-700 text-white font-medium rounded transition text-sm sm:text-[16px] add-to-cart-btn flex items-center justify-center" data-product-id="<?php echo get_the_ID(); ?>">В КОРЗИНУ
                             </button>
                         </div>
                         <?php

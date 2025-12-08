@@ -18,41 +18,41 @@ $defaults = array(
 $args = wp_parse_args($args ?? array(), $defaults);
 ?>
 
-<div id="consultation-section-<?php echo esc_attr($args['form_id']); ?>" class="relative rounded-[8px] overflow-hidden bg-gradient-to-r from-[#C1DCE8] to-[#B3D6E6] p-8 md:p-12 mb-20 min-h-[496px] flex items-center shadow-lg">
+<div id="consultation-section-<?php echo esc_attr($args['form_id']); ?>" class="relative rounded-[8px] overflow-hidden bg-gradient-to-r from-[#C1DCE8] to-[#B3D6E6] p-6 md:p-12 mb-10 md:mb-20 min-h-auto md:min-h-[496px] flex flex-col md:flex-row items-center shadow-lg">
     
     <div class="relative z-10 w-full">
-        <h2 class="text-[36px] font-bold text-gray-800 mb-4 tracking-tight">
+        <h2 class="text-[28px] md:text-[36px] font-bold text-gray-800 mb-4 tracking-tight">
             <?php echo esc_html($args['title']); ?>
         </h2>
-        <p class="text-[16px] text-gray-600 mb-8 md:max-w-[55%]">
+        <p class="text-[14px] md:text-[16px] text-gray-600 mb-6 md:mb-8 md:max-w-[55%]">
             <?php echo esc_html($args['desc']); ?>
         </p>
 
-        <form id="<?php echo esc_attr($args['form_id']); ?>" class="space-y-4 md:max-w-[77%]">
-            <div class="flex gap-4">
-                <input type="text" name="name" placeholder="Ваше имя*" required class="w-1/2 px-4 py-3 rounded bg-white border-none focus:ring-2 focus:ring-primary outline-none shadow-sm text-sm">
-                <input type="tel" name="phone" placeholder="Телефон*" required class="w-1/2 px-4 py-3 rounded bg-white border-none focus:ring-2 focus:ring-primary outline-none shadow-sm text-sm">
+        <form id="<?php echo esc_attr($args['form_id']); ?>" class="space-y-4 w-full md:max-w-[77%]">
+            <div class="flex flex-col md:flex-row gap-4">
+                <input type="text" name="name" placeholder="Ваше имя*" required class="w-full md:w-1/2 px-4 py-3 rounded bg-white border-none focus:ring-2 focus:ring-primary outline-none shadow-sm text-sm">
+                <input type="tel" name="phone" placeholder="Телефон*" required class="w-full md:w-1/2 px-4 py-3 rounded bg-white border-none focus:ring-2 focus:ring-primary outline-none shadow-sm text-sm">
             </div>
             <input type="text" name="question" placeholder="Вопрос" class="w-full px-4 py-3 rounded bg-white border-none focus:ring-2 focus:ring-primary outline-none shadow-sm text-sm">
             
-            <div class="flex items-start gap-2 text-xs text-gray-500 my-[60px]">
+            <div class="flex items-start gap-2 text-xs text-gray-500 my-6 md:my-[60px]">
                 <input type="checkbox" id="consent-<?php echo esc_attr($args['form_id']); ?>" required class="mt-0.5">
-                <label for="consent-<?php echo esc_attr($args['form_id']); ?>" class="text-[16px]">Согласен (а) на обработку персональных данных</label>
+                <label for="consent-<?php echo esc_attr($args['form_id']); ?>" class="text-[14px] md:text-[16px]">Согласен (а) на обработку персональных данных</label>
             </div>
 
-            <button type="submit" class="main-button md:text-[16px] md:w-[300px] text-white font-bold py-3 rounded shadow-lg shadow-gray-500/50 transition uppercase text-xs tracking-wider">
+            <button type="submit" class="main-button w-full md:w-[300px] text-white font-bold py-3 rounded shadow-lg shadow-gray-500/50 transition uppercase text-xs tracking-wider md:text-[16px]">
                 <?php echo esc_html($args['btn_text']); ?>
             </button>
 
             <div id="<?php echo esc_attr($args['message_id']); ?>" class="hidden text-sm mt-2"></div>
         </form>
 
-        <div class="mt-8 flex flex-col items-start md:items-end gap-4 text-gray-700 font-medium text-[16px] absolute bottom-0 right-0">
+        <div class="mt-8 flex flex-col items-start md:items-end gap-4 text-gray-700 font-medium text-[16px] relative md:absolute bottom-0 right-0">
             <span><?php echo esc_html($args['footer_text']); ?></span>
-            <div class="flex">
-                <div class="flex items-center gap-2 mr-[10px]">
+            <div class="flex flex-col md:flex-row gap-4 md:gap-0">
+                <div class="flex items-center gap-2 md:mr-[10px]">
                     <i class="fa-solid fa-phone text-[#4A86C8]"></i>
-                    <a href="tel:+375339166662" class="hover:text-primary transition font-bold md:text-[20px]">+375-33-916-66-62</a>
+                    <a href="tel:+375339166662" class="hover:text-primary transition font-bold text-[18px] md:text-[20px]">+375-33-916-66-62</a>
                 </div>
                 <div class="flex gap-2">
                     <a href="viber://chat?number=%2B375339166662" class="hover:opacity-80 transition" title="Написать в Viber">

@@ -14,23 +14,23 @@ get_header();
 <section class="relative py-12 lg:py-20 min-h-[500px] lg:min-h-[574px] overflow-hidden bg-[url('/wp-content/themes/torg-vent-brest/assets/images/Фон.png')] bg-cover bg-center">
 	<div class="container mx-auto px-4 max-w-[1240px] relative z-10 flex flex-col lg:flex-row items-center h-full">
 		<div class="w-full lg:w-3/5 mb-10 lg:mb-0 pt-10 lg:pt-0">
-			<h1 class="text-[26px] md:text-[36px] font-bold text-gray-800 leading-tight mb-6">
+			<h1 class="text-[26px] md:text-[36px] font-bold text-gray-800 leading-tight mb-8 mt-4">
 				Профессиональный монтаж <br>
 				и продажа холодильного <br>
 				и климатического оборудования
 			</h1>
-			<ul class="space-y-3 mb-8">
-				<li class="flex items-center text-gray-700 text-sm md:text-base">
-					<i class="fa-solid fa-check text-primary mr-3"></i>
-					Бесплатный выезд на замер
+			<ul class="space-y-6 mb-8">
+				<li class="flex items-center text-gray-700 text-sm md:text-[18px]">
+					<img class="mr-2 w-6 h-6" src="<?php echo get_template_directory_uri(); ?>/assets/images/check.png" alt="check">
+					<b class="sm:mr-2">Быстрые сроки</b>установки и доставки
 				</li>
-				<li class="flex items-center text-gray-700 text-sm md:text-base">
-					<i class="fa-solid fa-check text-primary mr-3"></i>
-					Только сертифицированное оборудование
+				<li class="flex items-center text-gray-700 text-sm md:text-[18px]">
+					<img class="mr-2 w-6 h-6" src="<?php echo get_template_directory_uri(); ?>/assets/images/check.png" alt="check">
+					<b class="sm:mr-2">Официальная гарантия</b> и качественный сервис
 				</li>
-				<li class="flex items-center text-gray-700 text-sm md:text-base">
-					<i class="fa-solid fa-check text-primary mr-3"></i>
-					Монтаж за 1 день
+				<li class="flex items-center text-gray-700 text-sm md:text-[18px]">
+					<img class="mr-2 w-6 h-6" src="<?php echo get_template_directory_uri(); ?>/assets/images/check.png" alt="check">
+					<b>Монтаж за 1 день</b>
 				</li>
 			</ul>
 			<?php
@@ -52,7 +52,7 @@ get_header();
     <!-- Categories Section -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4 max-w-[1240px]">
-            <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-12">Каталог продукции</h2>
+            <h2 class="text-[24px] md:text-[36px] font-bold text-center text-gray-800 mb-12">Каталог продукции</h2>
             
             <?php
             // Get all product categories
@@ -67,16 +67,16 @@ get_header();
                 
                 <div class="relative px-0 lg:px-0">
                     <!-- Categories Slider Container -->
-                    <div class="overflow-hidden">
-                        <div id="categories-slider" class="flex gap-6 transition-transform duration-500 ease-in-out">
+                    <div class="overflow-x-auto md:overflow-hidden pb-4 md:pb-0 hide-scrollbar snap-x snap-mandatory">
+                        <div id="categories-slider" class="flex gap-4 md:gap-6 transition-transform duration-500 ease-in-out">
                             <?php
                             foreach ($product_categories as $index => $category) :
                                 $category_link = get_term_link($category);
                                 $category_image = get_field('category_image', 'product_cat_' . $category->term_id);
                                 ?>
                                 <!-- Category Item -->
-                                <!-- Adaptive widths: Mobile 100%, Tablet 50% (minus gap), Desktop 25% (minus gap) -->
-                                <a href="<?php echo esc_url($category_link); ?>" class="category-item group bg-white rounded-lg p-6 shadow-sm hover:shadow-md border border-gray-100 transition text-center relative block no-underline flex-shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]">
+                                <!-- Adaptive widths: Mobile 85% (snap), Tablet 50%, Desktop 25% -->
+                                <a href="<?php echo esc_url($category_link); ?>" class="category-item group bg-white rounded-lg p-6 shadow-sm hover:shadow-md border border-gray-100 transition text-center relative block no-underline flex-shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] snap-center md:snap-align-none">
                                     <div class="h-40 flex items-center justify-center mb-4">
                                         <?php if ($category_image) : ?>
                                             <img src="<?php echo esc_url($category_image['url']); ?>" alt="<?php echo esc_attr($category->name); ?>" class="max-h-full max-w-full object-contain group-hover:scale-110 transition">
@@ -92,15 +92,15 @@ get_header();
                         </div>
                     </div>
                     
-                    <!-- Navigation Arrows -->
+                    <!-- Navigation Arrows (Hidden on mobile, visible on tablet+) -->
                     <?php if ($total_categories > 1) : ?>
                     <!-- Previous Arrow -->
-                    <button id="categories-prev" class="absolute top-1/2 left-0 lg:-left-4 transform -translate-y-1/2 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-700 transition z-10 opacity-50 cursor-not-allowed hidden sm:flex" disabled>
+                    <button id="categories-prev" class="absolute top-1/2 left-0 lg:-left-4 transform -translate-y-1/2 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-700 transition z-10 opacity-50 cursor-not-allowed hidden md:flex" disabled>
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
                     
                     <!-- Next Arrow -->
-                    <button id="categories-next" class="absolute top-1/2 right-0 lg:-right-4 transform -translate-y-1/2 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-700 transition z-10 hidden sm:flex">
+                    <button id="categories-next" class="absolute top-1/2 right-0 lg:-right-4 transform -translate-y-1/2 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-700 transition z-10 hidden md:flex">
                         <i class="fa-solid fa-chevron-right"></i>
                     </button>
                     
@@ -234,9 +234,14 @@ get_header();
     <!-- New Products Section -->
     <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4 max-w-[1240px]">
-            <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-12">Новинки</h2>
+            <h2 class="text-[24px] md:text-[36px] font-bold text-center text-gray-800 mb-12">Новинки</h2>
             
             <?php
+            // Get user favorites
+            $user_id = get_current_user_id();
+            $favorites = $user_id ? get_user_meta($user_id, 'favorite_products', true) : array();
+            if (!is_array($favorites)) $favorites = array();
+            
             $new_products = new WP_Query(array(
                 'post_type' => 'product',
                 'posts_per_page' => 8,
@@ -253,7 +258,10 @@ get_header();
                     $price = get_field('product_price');
                     $old_price = get_field('product_old_price');
                     $is_sale = get_field('is_on_sale');
+                    $is_new = get_field('is_new');
                     $code = get_field('product_code');
+                    $product_id = get_the_ID();
+                    $is_favorite = in_array($product_id, $favorites);
                     
                     // Image logic: Featured > Custom Field > Placeholder
                     $image = get_the_post_thumbnail_url(get_the_ID(), 'medium');
@@ -264,11 +272,15 @@ get_header();
                 ?>
                 <!-- Product Card -->
                 <div class="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition flex flex-col relative h-full group">
-                    <?php if($is_sale): ?>
+                    <?php if($is_new): ?>
+                        <span class="absolute top-4 left-4 bg-red-500 text-white text-[10px] font-bold px-3 py-1.5 rounded z-10">НОВИНКА</span>
+                    <?php elseif($is_sale): ?>
                         <span class="absolute top-4 left-4 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded z-10">АКЦИЯ</span>
                     <?php endif; ?>
                     
-                    <button class="absolute top-4 right-4 text-gray-300 hover:text-red-500 transition z-10"><i class="fa-regular fa-heart"></i></button>
+                    <button class="favorite-btn absolute top-4 right-4 transition z-10 hover:text-red-500 <?php echo $is_favorite ? 'text-red-500' : 'text-gray-300'; ?>" data-product-id="<?php echo $product_id; ?>">
+                        <i class="<?php echo $is_favorite ? 'fa-solid' : 'fa-regular'; ?> fa-heart text-xl"></i>
+                    </button>
                     
                     <a href="<?php the_permalink(); ?>" class="block h-40 flex items-center justify-center mb-4 p-4 overflow-hidden">
                         <img src="<?php echo esc_url($image); ?>" alt="<?php the_title_attribute(); ?>" class="max-h-full object-contain group-hover:scale-105 transition duration-300">
@@ -312,7 +324,7 @@ get_header();
     <!-- Popular Products Section -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4 max-w-[1240px]">
-            <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-12">Популярные товары</h2>
+            <h2 class="text-[24px] md:text-[36px] font-bold text-center text-gray-800 mb-12">Популярные товары</h2>
             
             <?php
             $popular_products = new WP_Query(array(
@@ -331,7 +343,10 @@ get_header();
                     $price = get_field('product_price');
                     $old_price = get_field('product_old_price');
                     $is_sale = get_field('is_on_sale');
+                    $is_new = get_field('is_new');
                     $code = get_field('product_code');
+                    $product_id = get_the_ID();
+                    $is_favorite = in_array($product_id, $favorites);
                     
                     // Image logic: Featured > Custom Field > Placeholder
                     $image = get_the_post_thumbnail_url(get_the_ID(), 'medium');
@@ -342,11 +357,15 @@ get_header();
                 ?>
                 <!-- Product Card -->
                 <div class="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition flex flex-col relative h-full group border border-gray-100">
-                    <?php if($is_sale): ?>
+                    <?php if($is_new): ?>
+                        <span class="absolute top-4 left-4 bg-red-500 text-white text-[10px] font-bold px-3 py-1.5 rounded z-10">НОВИНКА</span>
+                    <?php elseif($is_sale): ?>
                         <span class="absolute top-4 left-4 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded z-10">АКЦИЯ</span>
                     <?php endif; ?>
                     
-                    <button class="absolute top-4 right-4 text-gray-300 hover:text-red-500 transition z-10"><i class="fa-regular fa-heart"></i></button>
+                    <button class="favorite-btn absolute top-4 right-4 transition z-10 hover:text-red-500 <?php echo $is_favorite ? 'text-red-500' : 'text-gray-300'; ?>" data-product-id="<?php echo $product_id; ?>">
+                        <i class="<?php echo $is_favorite ? 'fa-solid' : 'fa-regular'; ?> fa-heart text-xl"></i>
+                    </button>
                     
                     <a href="<?php the_permalink(); ?>" class="block h-40 flex items-center justify-center mb-4 p-4 overflow-hidden">
                         <img src="<?php echo esc_url($image); ?>" alt="<?php the_title_attribute(); ?>" class="max-h-full object-contain group-hover:scale-105 transition duration-300">
@@ -411,38 +430,132 @@ get_header();
             // Fallback if empty
             if (empty($brands_list)) {
                 $brands_list = array(
-                    array('logo' => array('url' => 'https://placehold.co/100x40/e5e7eb/6b7280?text=LG'), 'name' => 'LG'),
-                    array('logo' => array('url' => 'https://placehold.co/100x40/e5e7eb/6b7280?text=MDV'), 'name' => 'MDV'),
-                    array('logo' => array('url' => 'https://placehold.co/120x40/e5e7eb/6b7280?text=Electrolux'), 'name' => 'Electrolux'),
-                    array('logo' => array('url' => 'https://placehold.co/100x40/e5e7eb/6b7280?text=Mitsubishi'), 'name' => 'Mitsubishi'),
-                    array('logo' => array('url' => 'https://placehold.co/100x40/e5e7eb/6b7280?text=Ballu'), 'name' => 'Ballu'),
-                    array('logo' => array('url' => 'https://placehold.co/80x40/e5e7eb/6b7280?text=TCL'), 'name' => 'TCL'),
+                    array('logo' => array('url' => 'https://placehold.co/180x96/ffffff/1E65C6?text=LG'), 'name' => 'LG'),
+                    array('logo' => array('url' => 'https://placehold.co/180x96/ffffff/1E65C6?text=MDV'), 'name' => 'MDV'),
+                    array('logo' => array('url' => 'https://placehold.co/180x96/ffffff/1E65C6?text=Electrolux'), 'name' => 'Electrolux'),
+                    array('logo' => array('url' => 'https://placehold.co/180x96/ffffff/1E65C6?text=Mitsubishi'), 'name' => 'Mitsubishi'),
+                    array('logo' => array('url' => 'https://placehold.co/180x96/ffffff/1E65C6?text=Ballu'), 'name' => 'Ballu'),
+                    array('logo' => array('url' => 'https://placehold.co/180x96/ffffff/1E65C6?text=TCL'), 'name' => 'TCL'),
+                    array('logo' => array('url' => 'https://placehold.co/180x96/ffffff/1E65C6?text=Gree'), 'name' => 'Gree'),
+                    array('logo' => array('url' => 'https://placehold.co/180x96/ffffff/1E65C6?text=Haier'), 'name' => 'Haier'),
                 );
             }
             ?>
             
-            <h2 class="text-xl font-bold text-center text-gray-800 mb-8"><?php echo esc_html($brands_title); ?></h2>
-            <div class="flex flex-wrap justify-center items-center gap-8 lg:gap-12 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-                <?php foreach($brands_list as $brand): 
-                    $logo = is_array($brand) && isset($brand['logo']) ? $brand['logo'] : null;
-                    $name = is_array($brand) && isset($brand['name']) ? $brand['name'] : 'Brand';
-                    $logo_url = $logo && is_array($logo) ? $logo['url'] : '';
-                    
-                    if($logo_url):
-                ?>
-                    <img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr($name); ?>" class="h-8 lg:h-10 object-contain">
-                <?php 
-                    endif;
-                endforeach; 
-                ?>
+            <h2 class="text-[24px] md:text-[36px] font-bold text-center text-gray-800 mb-8"><?php echo esc_html($brands_title); ?></h2>
+            
+            <div class="relative max-w-[1200px] mx-auto">
+                <!-- Left Arrow -->
+                <button id="brands-prev" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-4 lg:-translate-x-6 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#1E65C6] text-white flex items-center justify-center shadow-lg hover:bg-[#154b96] transition disabled:opacity-50 disabled:cursor-not-allowed">
+                    <i class="fa-solid fa-chevron-left text-sm"></i>
+                </button>
+                
+                <!-- Brands Container -->
+                <div class="overflow-hidden px-1">
+                    <div id="brands-track" class="flex transition-transform duration-500 ease-in-out">
+                        <?php foreach($brands_list as $brand): 
+                            $logo = is_array($brand) && isset($brand['logo']) ? $brand['logo'] : null;
+                            $name = is_array($brand) && isset($brand['name']) ? $brand['name'] : 'Brand';
+                            $logo_url = $logo && is_array($logo) ? $logo['url'] : '';
+                            
+                            if($logo_url):
+                        ?>
+                            <div class="brand-item flex-shrink-0 flex items-center justify-center p-4 transition-opacity duration-300 hover:opacity-80" style="width: 50%; max-width: 50%;">
+                                <img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr($name); ?>" class="object-contain" style="width: 180px; height: 96px;">
+                            </div>
+                        <?php 
+                            endif;
+                        endforeach; 
+                        ?>
+                    </div>
+                </div>
+                
+                <!-- Right Arrow -->
+                <button id="brands-next" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-4 lg:translate-x-6 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#1E65C6] text-white flex items-center justify-center shadow-lg hover:bg-[#154b96] transition disabled:opacity-50 disabled:cursor-not-allowed">
+                    <i class="fa-solid fa-chevron-right text-sm"></i>
+                </button>
             </div>
+            
+            <style>
+                @media (min-width: 768px) {
+                    .brand-item {
+                        width: calc(100% / 6) !important;
+                        max-width: calc(100% / 6) !important;
+                    }
+                }
+            </style>
+            
+            <script>
+            (function() {
+                const track = document.getElementById('brands-track');
+                const prevBtn = document.getElementById('brands-prev');
+                const nextBtn = document.getElementById('brands-next');
+                const items = document.querySelectorAll('.brand-item');
+                
+                if (!track || !prevBtn || !nextBtn || items.length === 0) return;
+                
+                let currentIndex = 0;
+                const totalItems = items.length;
+                
+                function getVisibleCount() {
+                    // 2 on mobile, 6 on desktop (md and up)
+                    return window.innerWidth >= 768 ? 6 : 2;
+                }
+                
+                function updateCarousel() {
+                    const visibleCount = getVisibleCount();
+                    const maxIndex = Math.max(0, totalItems - visibleCount);
+                    
+                    // Adjust currentIndex if it exceeds maxIndex after resize
+                    if (currentIndex > maxIndex) {
+                        currentIndex = maxIndex;
+                    }
+                    
+                    // Each item width is 100/visibleCount %
+                    const percentPerItem = 100 / visibleCount;
+                    const offset = currentIndex * percentPerItem;
+                    track.style.transform = `translateX(-${offset}%)`;
+                    
+                    // Update button states
+                    prevBtn.disabled = currentIndex === 0;
+                    nextBtn.disabled = currentIndex >= maxIndex;
+                }
+                
+                prevBtn.addEventListener('click', () => {
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                        updateCarousel();
+                    }
+                });
+                
+                nextBtn.addEventListener('click', () => {
+                    const visibleCount = getVisibleCount();
+                    const maxIndex = Math.max(0, totalItems - visibleCount);
+                    
+                    if (currentIndex < maxIndex) {
+                        currentIndex++;
+                        updateCarousel();
+                    }
+                });
+                
+                // Update on window resize
+                let resizeTimer;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(updateCarousel, 100);
+                });
+                
+                // Initial update
+                updateCarousel();
+            })();
+            </script>
         </div>
     </section>
 
     <!-- Installation Promo -->
-    <section class="py-16 bg-white">
+    <section class="py-16">
         <div class="container mx-auto px-4 max-w-[1240px]">
-            <div class="bg-blue-50 rounded-2xl overflow-hidden flex flex-col lg:flex-row items-center relative">
+            <div class="md:min-h-[488px] rounded-2xl overflow-hidden flex flex-col lg:flex-row items-center relative bg-[url('<?php echo get_template_directory_uri(); ?>/assets/images/a1.png')] bg-cover bg-center">
                 <div class="p-8 lg:p-12 w-full lg:w-1/2 z-10">
                     <h2 class="text-2xl lg:text-3xl font-bold text-gray-800 mb-6">
                         Закажите монтаж систем <br>
@@ -463,13 +576,11 @@ get_header();
                             Чистота после монтажа
                         </li>
                     </ul>
-                    <a href="<?php echo home_url('/installation'); ?>" class="inline-block bg-primary hover:bg-blue-700 text-white font-bold py-3 px-8 rounded transition shadow-lg shadow-blue-500/30 text-sm">
-                        ПОДРОБНЕЕ О МОНТАЖЕ
+                    <a href="<?php echo home_url('/installation'); ?>" class="main-button text-white font-bold py-3 px-8 rounded transition shadow-lg shadow-blue-500/30 text-sm">
+                        ПОДРОБНЕЕ ОБ УСЛУГЕ
                     </a>
                 </div>
                 <div class="w-full lg:w-1/2 h-64 lg:h-auto relative">
-                     <!-- Placeholder for Worker Image -->
-                    <img src="https://placehold.co/600x400/dbeafe/1d63cc?text=Worker+Image" alt="Worker" class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
@@ -477,7 +588,7 @@ get_header();
 
     <!-- FAQ Section -->
     <section class="py-16 bg-[#F9FAFB]">
-        <div class="container mx-auto px-4 max-w-[800px]">
+        <div class="container mx-auto px-4 max-w-[1240px]">
              <?php
             // ACF Fields
             $faq_title = function_exists('get_field') ? get_field('home_faq_title') : '';
@@ -626,3 +737,118 @@ get_header();
 
 <?php
 get_footer();
+?>
+
+<script>
+(function() {
+    'use strict';
+    
+    console.log('Favorite buttons script loaded');
+    
+    function initFavoriteButtons() {
+        const favoriteButtons = document.querySelectorAll('.favorite-btn');
+        console.log('Found favorite buttons:', favoriteButtons.length);
+        
+        favoriteButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const productId = this.dataset.productId;
+                const icon = this.querySelector('i');
+                const btn = this;
+                
+                console.log('Clicked favorite button for product:', productId);
+                
+                // Determine current state
+                const isFavorite = icon.classList.contains('fa-solid');
+                console.log('Current state - is favorite:', isFavorite);
+                
+                // Optimistic UI update - toggle immediately
+                if (isFavorite) {
+                    // Currently favorited, remove it
+                    icon.classList.remove('fa-solid');
+                    icon.classList.add('fa-regular');
+                    btn.classList.remove('text-red-500');
+                    btn.classList.add('text-gray-300');
+                    console.log('UI: Removed from favorites (optimistic)');
+                } else {
+                    // Not favorited, add it
+                    icon.classList.remove('fa-regular');
+                    icon.classList.add('fa-solid');
+                    btn.classList.remove('text-gray-300');
+                    btn.classList.add('text-red-500');
+                    console.log('UI: Added to favorites (optimistic)');
+                }
+                
+                // Send AJAX request
+                fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        action: 'toggle_favorite',
+                        product_id: productId,
+                        nonce: '<?php echo wp_create_nonce('favorite_nonce'); ?>'
+                    })
+                })
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Server response:', data);
+                    
+                    if (!data.success) {
+                        // Server error - revert the optimistic update
+                        console.error('Server error, reverting UI');
+                        if (isFavorite) {
+                            // Revert back to favorited
+                            icon.classList.remove('fa-regular');
+                            icon.classList.add('fa-solid');
+                            btn.classList.remove('text-gray-300');
+                            btn.classList.add('text-red-500');
+                        } else {
+                            // Revert back to not favorited
+                            icon.classList.remove('fa-solid');
+                            icon.classList.add('fa-regular');
+                            btn.classList.remove('text-red-500');
+                            btn.classList.add('text-gray-300');
+                        }
+                        
+                        <?php if (!is_user_logged_in()): ?>
+                        alert('Пожалуйста, войдите в систему, чтобы добавить товар в избранное');
+                        <?php else: ?>
+                        alert('Произошла ошибка. Попробуйте еще раз.');
+                        <?php endif; ?>
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                    // Revert on error
+                    if (isFavorite) {
+                        icon.classList.remove('fa-regular');
+                        icon.classList.add('fa-solid');
+                        btn.classList.remove('text-gray-300');
+                        btn.classList.add('text-red-500');
+                    } else {
+                        icon.classList.remove('fa-solid');
+                        icon.classList.add('fa-regular');
+                        btn.classList.remove('text-red-500');
+                        btn.classList.add('text-gray-300');
+                    }
+                    alert('Ошибка соединения. Проверьте интернет.');
+                });
+            });
+        });
+    }
+    
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initFavoriteButtons);
+    } else {
+        initFavoriteButtons();
+    }
+})();
+</script>

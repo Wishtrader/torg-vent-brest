@@ -291,7 +291,7 @@ $entrance = get_user_meta($user_id, 'entrance', true);
                                         ?>
                                         <div class="bg-white rounded-lg border border-gray-100 hover:shadow-lg transition group relative p-4 product-card" id="fav-product-<?php echo $product_id; ?>">
                                             <?php if ($is_new) : ?>
-                                                <span class="absolute top-4 left-4 bg-red-600 text-white text-[10px] font-bold px-2 py-1 uppercase">Новинка</span>
+                                                <span class="absolute top-4 left-4 bg-red-500 text-white text-[10px] font-bold px-3 py-1.5 rounded z-10">НОВИНКА</span>
                                             <?php endif; ?>
                                             
                                             <button class="favorite-btn absolute top-4 right-4 text-gray-300 hover:text-red-500 transition z-10" data-product-id="<?php echo $product_id; ?>">

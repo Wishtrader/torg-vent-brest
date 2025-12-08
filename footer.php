@@ -55,18 +55,24 @@
                             +375-33-916-66-62
                         </a>
                         <div class="flex gap-2 my-1">
-                            <a href="#" class="bg-[#7B519D] p-1.5 rounded text-white hover:opacity-80 transition"><i class="fa-brands fa-viber"></i></a>
-                            <a href="#" class="bg-[#2AABEE] p-1.5 rounded text-white hover:opacity-80 transition"><i class="fa-brands fa-telegram"></i></a>
-                            <a href="#" class="bg-[#25D366] p-1.5 rounded text-white hover:opacity-80 transition"><i class="fa-brands fa-whatsapp"></i></a>
+                            <a href="viber://chat?number=%2B375339166662" class="bg-[#7B519D] p-1.5 rounded text-white hover:opacity-80 transition">
+															<img src="<?php echo get_template_directory_uri(); ?>/assets/images/viber.svg" alt="Viber">
+														</a>
+                            <a href="https://t.me/+375339166667" class="bg-[#2AABEE] p-1.5 rounded text-white hover:opacity-80 transition">
+															<img src="<?php echo get_template_directory_uri(); ?>/assets/images/tg.svg" alt="Telegram">
+														</a>
+                            <a href="https://wa.me/375339166662" class="bg-[#25D366] p-1.5 rounded text-white hover:opacity-80 transition">
+															<img src="<?php echo get_template_directory_uri(); ?>/assets/images/wu.svg" alt="WhatsApp">
+														</a>
                         </div>
                         <a href="tel:+375339166667" class="flex items-center gap-2 hover:text-white transition">
                             <i class="fa-solid fa-phone text-white text-xs"></i>
                             +375-33-916-66-67
                         </a>
-                        <div class="text-gray-300 text-xs mt-2">
+                        <div class="text-white text-xs mt-2">
                             <p>пн-пт - с 9:00 до 17:00</p>
                             <p>сб - с 9:00 до 14:00</p>
-                            <p>вс - выходной</p>
+                            <p class="text-gray-300">вс - выходной</p>
                         </div>
                         <a href="mailto:Torg_vent@mail.ru" class="mt-2 hover:text-white transition">Torg_vent@mail.ru</a>
                     </div>
@@ -74,10 +80,10 @@
             </div>
 
             <!-- Divider -->
-            <div class="border-t border-gray-600 mb-8"></div>
+            <div class="border-t border-[#DEDEDE]/60 mb-4"></div>
 
             <!-- Bottom Footer Section -->
-            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 text-[10px] text-gray-400">
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 text-[10px] text-white">
                 
                 <!-- Copyright & Legal -->
                 <div class="max-w-2xl">
@@ -96,9 +102,10 @@
                     <span class="font-bold text-white">Оплати</span>
                 </div>
             </div>
+						<div class="border-t border-[#DEDEDE]/60 mb-4 mt-4"></div>
             
              <!-- Bottom Legal 2 -->
-             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 text-[10px] text-gray-400 mt-6">
+             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 text-[10px] text-white mt-6">
                 <div class="max-w-xl">
                     <p>Контакты для обращения покупателей (по вопросам нарушения их прав):</p>
                     <p>+37533-916-66-62, Torg_vent@mail.ru</p>

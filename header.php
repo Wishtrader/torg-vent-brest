@@ -52,9 +52,9 @@
 <div id="page" class="site flex flex-col min-h-screen font-sans">
     
     <!-- Top Bar -->
-    <div id="top-bar" class="bg-white border-b border-gray-200">
+    <div id="top-bar" class="bg-white border-b border-gray-200 hidden md:block">
         <div class="container mx-auto px-4 max-w-[1240px] py-2 flex flex-col md:flex-row justify-between items-center text-[16px] text-gray-600 font-medium">
-            <div class="hidden md:block mb-2 md:mb-0 tracking-[0.01em]">
+            <div class="mb-2 md:mb-0 tracking-[0.01em]">
                 Кондиционеры в Брестской и Гродненской области
             </div>
             <div class="flex flex-wrap justify-center md:justify-end items-center gap-4 md:gap-6 w-full md:w-auto">
@@ -88,25 +88,25 @@
 
     <!-- Main Header -->
     <header id="masthead" class="site-header bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4 max-w-[1240px] py-4 flex items-center justify-between">
+        <div class="container mx-auto px-4 max-w-[1240px] py-3 md:py-4 flex items-center justify-between">
             
             <!-- Logo -->
-            <div class="site-branding flex-shrink-0 mr-4 lg:mr-[70px]">
+            <div class="site-branding flex-shrink-0 mr-2 md:mr-4 lg:mr-[70px]">
                 <?php
                 if ( has_custom_logo() ) {
                     the_custom_logo();
                 } else {
                     ?>
                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="text-[18px] font-bold text-primary no-underline">
-                        <p class="font-bold text-[18px] text-primary">БрестКлимат.Бай</p>
+                        <p class="font-bold text-[16px] md:text-[18px] text-primary uppercase leading-tight">БрестКлимат<br><span class="text-sm text-gray-600 font-normal normal-case">климатическая техника</span></p>
                     </a>
                     <?php
                 }
                 ?>
             </div>
 
-            <!-- Catalog Button with Dropdown -->
-            <div class="hidden md:block mr-4 lg:mr-8 relative group">
+            <!-- Catalog Button with Dropdown (Desktop) -->
+            <div class="hidden lg:block mr-4 lg:mr-8 relative group">
                 <button class="bg-primary hover:bg-blue-700 text-white font-bold py-2 px-6 min-h-[44px] rounded-[8px] flex items-center gap-3 transition">
                     <i class="fa-solid fa-bars"></i>
                     КАТАЛОГ
@@ -127,8 +127,9 @@
                             $category_image = get_field('category_image', 'product_cat_' . $category->term_id);
                             ?>
                             <li>
-                                <a href="<?php echo esc_url($category_link); ?>" class="block px-4 py-3 hover:bg-gray-50 transition text-gray-700 hover:text-primary no-underline">
+                                <a href="<?php echo esc_url($category_link); ?>" class="block px-4 py-3 hover:bg-gray-50 transition text-gray-700 hover:text-primary no-underline flex items-center justify-between">
                                     <span class="font-medium text-sm"><?php echo esc_html($category->name); ?></span>
+                                    <i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i>
                                 </a>
                             </li>
                             <?php
@@ -141,38 +142,25 @@
                 </div>
             </div>
 
-            <!-- Navigation -->
+            <!-- Navigation (Desktop) -->
             <nav id="site-navigation" class="main-navigation hidden lg:flex flex-grow justify-center">
-                <?php
-                if ( has_nav_menu( 'menu-1' ) ) {
-                    wp_nav_menu(
-                        array(
-                            'theme_location' => 'menu-1',
-                            'menu_id'        => 'primary-menu',
-                            'container'      => false,
-                            'menu_class'     => 'flex gap-6 xl:gap-8 text-gray-700 font-medium text-sm list-none m-0 p-0',
-                        )
-                    );
-                } else {
-                    // Fallback links matching the image
-                    echo '<ul class="flex gap-6 xl:gap-8 text-gray-700 font-medium text-sm list-none m-0 p-0">';
-                    echo '<li><a href="' . home_url('/installation') . '" class="hover:text-primary text-[16px] transition no-underline text-gray-700">Монтаж</a></li>';
-                    echo '<li><a href="' . home_url('/return-exchange') . '" class="hover:text-primary text-[16px] transition no-underline text-gray-700">Возврат и обмен</a></li>';
-                    echo '<li><a href="' . home_url('/payment-delivery') . '" class="hover:text-primary text-[16px] transition no-underline text-gray-700">Оплата и доставка</a></li>';
-                    echo '<li><a href="' . home_url('/contacts') . '" class="hover:text-primary text-[16px] transition no-underline text-gray-700">Контакты</a></li>';
-                    echo '</ul>';
-                }
-                ?>
+                <ul class="flex gap-6 xl:gap-8 text-gray-700 font-medium text-sm list-none m-0 p-0">
+                    <li><a href="<?php echo home_url('/installation'); ?>" class="hover:text-primary text-[15px] transition no-underline text-gray-700">Монтаж</a></li>
+                    <li><a href="<?php echo home_url('/return-exchange'); ?>" class="hover:text-primary text-[15px] transition no-underline text-gray-700">Возврат и обмен</a></li>
+                    <li><a href="<?php echo home_url('/payment-delivery'); ?>" class="hover:text-primary text-[15px] transition no-underline text-gray-700">Оплата и доставка</a></li>
+                    <li><a href="<?php echo home_url('/contacts'); ?>" class="hover:text-primary text-[15px] transition no-underline text-gray-700">Контакты</a></li>
+                </ul>
             </nav>
 
             <!-- User Actions -->
-            <div class="flex items-center gap-4 md:gap-6 ml-auto">
+            <div class="flex items-center gap-3 md:gap-6 ml-auto">
+                <a href="tel:+375339166662" class="lg:hidden w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-primary">
+                    <i class="fa-solid fa-phone text-sm"></i>
+                </a>
+
                 <?php if (is_user_logged_in()) : ?>
                     <a href="<?php echo home_url('/account'); ?>" class="flex items-center gap-2 text-gray-700 font-medium hover:text-primary transition no-underline" title="Личный кабинет">
                         <i class="fa-regular fa-user text-xl"></i>
-                    </a>
-                    <a href="<?php echo wp_logout_url(home_url()); ?>" class="flex items-center gap-2 text-gray-700 font-medium hover:text-primary transition no-underline" title="Выход">
-                        <i class="fa-solid fa-right-from-bracket text-xl"></i>
                     </a>
                 <?php else : ?>
                     <a href="<?php echo home_url('/login'); ?>" class="flex items-center gap-2 text-gray-700 font-medium hover:text-primary transition no-underline">
@@ -181,18 +169,124 @@
                     </a>
                 <?php endif; ?>
                 <a href="<?php echo home_url('/cart'); ?>" class="relative text-gray-700 hover:text-primary transition" title="Корзина">
-                    <i class="fa-solid fa-cart-shopping text-2xl"></i>
+                    <i class="fa-solid fa-cart-shopping text-xl md:text-2xl"></i>
                     <?php 
                     $cart_count = get_cart_count();
                     ?>
                     <span class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full border-2 border-white header-cart-count<?php echo $cart_count === 0 ? ' hidden' : ''; ?>"><?php echo $cart_count; ?></span>
                 </a>
                 
-                <!-- Mobile Menu Button (Visible only on small screens) -->
-                <button class="lg:hidden text-gray-700 text-2xl ml-2">
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-toggle" class="lg:hidden text-gray-700 text-2xl ml-2 active:scale-95 transition">
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
 
         </div>
     </header><!-- #masthead -->
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/50 z-[60] hidden transition-opacity duration-300 opacity-0"></div>
+
+    <!-- Mobile Menu Sidebar -->
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[85%] max-w-[320px] bg-white z-[70] transform translate-x-full transition-transform duration-300 shadow-xl overflow-y-auto">
+        <div class="flex flex-col h-full">
+            <!-- Mobile Menu Header -->
+            <div class="flex items-center justify-between p-4 border-b border-gray-100 bg-gray-50">
+                <span class="font-bold text-gray-800 text-lg">Меню</span>
+                <button id="mobile-menu-close" class="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-red-500 transition">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Search -->
+            <div class="p-4 border-b border-gray-100">
+                <form role="search" method="get" class="relative" action="<?php echo esc_url(home_url('/')); ?>">
+                    <input type="search" class="w-full h-10 pl-4 pr-10 rounded-lg bg-gray-100 border-none text-sm focus:ring-2 focus:ring-primary" placeholder="Поиск товаров..." value="<?php echo get_search_query(); ?>" name="s">
+                    <button type="submit" class="absolute right-0 top-0 h-10 w-10 flex items-center justify-center text-gray-500 hover:text-primary">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Mobile Catalog -->
+            <div class="px-4 py-2">
+                <h3 class="font-bold text-gray-400 text-xs uppercase tracking-wider mb-2 mt-2">Каталог</h3>
+                <ul class="space-y-1">
+                    <?php
+                    if (!empty($product_categories) && !is_wp_error($product_categories)) :
+                        foreach ($product_categories as $category) :
+                            ?>
+                            <li>
+                                <a href="<?php echo esc_url(get_term_link($category)); ?>" class="flex items-center justify-between py-2 text-gray-700 hover:text-primary font-medium">
+                                    <?php echo esc_html($category->name); ?>
+                                    <i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i>
+                                </a>
+                            </li>
+                            <?php
+                        endforeach;
+                    endif;
+                    ?>
+                </ul>
+            </div>
+
+            <div class="border-t border-gray-100 my-2"></div>
+
+            <!-- Mobile Navigation -->
+            <div class="px-4 py-2">
+                <h3 class="font-bold text-gray-400 text-xs uppercase tracking-wider mb-2 mt-2">Информация</h3>
+                <ul class="space-y-2">
+                    <li><a href="<?php echo home_url('/installation'); ?>" class="block py-2 text-gray-700 hover:text-primary">Монтаж</a></li>
+                    <li><a href="<?php echo home_url('/return-exchange'); ?>" class="block py-2 text-gray-700 hover:text-primary">Возврат и обмен</a></li>
+                    <li><a href="<?php echo home_url('/payment-delivery'); ?>" class="block py-2 text-gray-700 hover:text-primary">Оплата и доставка</a></li>
+                    <li><a href="<?php echo home_url('/contacts'); ?>" class="block py-2 text-gray-700 hover:text-primary">Контакты</a></li>
+                </ul>
+            </div>
+
+            <!-- Mobile Contacts -->
+            <div class="mt-auto bg-gray-50 p-4 border-t border-gray-100">
+                <div class="space-y-3">
+                    <a href="tel:+375339166662" class="flex items-center gap-3 text-gray-700 font-medium">
+                        <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm text-primary"><i class="fa-solid fa-phone"></i></div>
+                        +375-33-916-66-62
+                    </a>
+                    <a href="tel:+375339166667" class="flex items-center gap-3 text-gray-700 font-medium">
+                        <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm text-primary"><i class="fa-solid fa-phone"></i></div>
+                        +375-33-916-66-67
+                    </a>
+                    <div class="flex gap-3 mt-4">
+                        <a href="viber://chat?number=%2B375339166662" class="flex-1 h-10 bg-[#7B519D] rounded-lg flex items-center justify-center text-white"><i class="fa-brands fa-viber"></i></a>
+                        <a href="https://t.me/+375339166667" class="flex-1 h-10 bg-[#2AABEE] rounded-lg flex items-center justify-center text-white"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://wa.me/375339166667" class="flex-1 h-10 bg-[#25D366] rounded-lg flex items-center justify-center text-white"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleBtn = document.getElementById('mobile-menu-toggle');
+        const closeBtn = document.getElementById('mobile-menu-close');
+        const menu = document.getElementById('mobile-menu');
+        const overlay = document.getElementById('mobile-menu-overlay');
+
+        function openMenu() {
+            menu.classList.remove('translate-x-full');
+            overlay.classList.remove('hidden');
+            setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            menu.classList.add('translate-x-full');
+            overlay.classList.add('opacity-0');
+            setTimeout(() => overlay.classList.add('hidden'), 300);
+            document.body.style.overflow = '';
+        }
+
+        toggleBtn.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+    });
+    </script>

@@ -77,9 +77,9 @@ get_header();
                     
                     <!-- Product Image Gallery -->
                     <div class="flex flex-col items-center">
-                        <div class="mb-4 bg-white sm:mt-4 sm:w-[486px] sm:h-[486px] rounded-lg p-8 flex items-center justify-center relative group">
+                        <div class="mb-4 bg-white sm:mt-4 w-full sm:max-w-[486px] sm:h-[486px] rounded-lg p-8 flex items-center justify-center relative group aspect-square sm:aspect-auto">
                             <?php if ($is_new) : ?>
-                                <span class="absolute top-4 left-4 bg-[#E3000F] text-white text-xs font-bold px-3 py-1 rounded z-20">Новинка</span>
+                                <span class="absolute top-4 left-4 bg-red-500 text-white text-[10px] font-bold px-3 py-1.5 rounded z-20">НОВИНКА</span>
                             <?php endif; ?>
                             
                             <?php 
@@ -117,18 +117,18 @@ get_header();
                         if (count($all_images) > 1) : ?>
                             <div class="relative px-8 w-fit mx-auto">
                                 <!-- Navigation Buttons -->
-                                <button id="prev-slide" class="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-full shadow hover:bg-gray-50 text-gray-600 z-10">
+                                <button id="prev-slide" class="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-full shadow hover:bg-gray-50 text-gray-600 z-10 hidden md:flex">
                                     <i class="fa-solid fa-chevron-left"></i>
                                 </button>
-                                <button id="next-slide" class="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-full shadow hover:bg-gray-50 text-gray-600 z-10">
+                                <button id="next-slide" class="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-full shadow hover:bg-gray-50 text-gray-600 z-10 hidden md:flex">
                                     <i class="fa-solid fa-chevron-right"></i>
                                 </button>
 
                                 <!-- Thumbnails Container -->
-                                <div id="thumbnails-container" class="overflow-hidden py-2 max-w-[432px]">
-                                    <div class="flex gap-2 transition-transform duration-300" id="thumbnails-track">
+                                <div id="thumbnails-container" class="overflow-x-auto md:overflow-hidden py-2 max-w-[432px] w-full hide-scrollbar snap-x snap-mandatory">
+                                    <div class="flex gap-2 transition-transform duration-300 min-w-min md:min-w-0" id="thumbnails-track">
                                         <?php foreach ($all_images as $index => $img) : ?>
-                                            <div class="flex-shrink-0 w-20 h-20 border-2 <?php echo $index === 0 ? 'border-primary' : 'border-transparent'; ?> rounded cursor-pointer hover:border-primary transition p-1 bg-white thumbnail-item" 
+                                            <div class="flex-shrink-0 w-20 h-20 border-2 <?php echo $index === 0 ? 'border-primary' : 'border-transparent'; ?> rounded cursor-pointer hover:border-primary transition p-1 bg-white thumbnail-item snap-start" 
                                                  onclick="changeMainImage('<?php echo esc_url($img['url']); ?>', this)">
                                                 <img src="<?php echo esc_url($img['thumb']); ?>" alt="<?php echo esc_attr($img['alt']); ?>" class="w-full h-full object-contain">
                                             </div>
@@ -306,13 +306,13 @@ get_header();
 																</div>
                                 
                                 <!-- Quantity and Add to Cart -->
-                                <div class="flex items-center gap-4 mb-4 sm:ml-[20px] p-[16px] bg-white rounded-2 sm:mt-2 shadow-lg">
-                                    <div class="flex sm:h-[50px] items-center border border-gray-300 rounded">
-                                        <button class="px-4 py-2 hover:bg-gray-100 transition">-</button>
-                                        <input type="number" value="1" min="1" class="pl-3 w-16 text-center border-x border-gray-300 py-2">
-                                        <button class="px-4 py-2 hover:bg-gray-100 transition">+</button>
+                                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-4 sm:ml-[20px] p-[16px] bg-white rounded-2 sm:mt-2 shadow-lg">
+                                    <div class="flex sm:h-[50px] items-center border border-gray-300 rounded justify-center">
+                                        <button class="px-4 py-2 hover:bg-gray-100 transition h-full">-</button>
+                                        <input type="number" value="1" min="1" class="pl-3 w-16 text-center border-x border-gray-300 py-2 h-full">
+                                        <button class="px-4 py-2 hover:bg-gray-100 transition h-full">+</button>
                                     </div>
-                                    <button class="main-button shadow-lg border-1 flex-1 sm:h-[50px] text-white font-bold py-3 px-8 rounded">
+                                    <button class="main-button shadow-lg border-1 flex-1 h-[50px] sm:h-[50px] text-white font-bold py-3 px-8 rounded">
                                         В КОРЗИНУ
                                     </button>
                                 </div>
@@ -325,7 +325,7 @@ get_header();
                 <?php if (get_the_content()) : ?>
                     <div class="mb-12">
                         <h2 class="text-2xl font-bold mb-4">ОПИСАНИЕ ТОВАРА</h2>
-                        <div class="prose max-w-none">
+                        <div class="prose max-w-none overflow-x-auto">
                             <?php the_content(); ?>
                         </div>
                     </div>
@@ -335,7 +335,7 @@ get_header();
                 <?php if ($product_specs_editor) : ?>
                     <div class="mb-12">
                         <h2 class="text-2xl font-bold mb-4">ХАРАКТЕРИСТИКИ ТОВАРА</h2>
-                        <div class="prose max-w-none bg-white border border-gray-200 rounded-lg p-6">
+                        <div class="prose max-w-none bg-white border border-gray-200 rounded-lg p-6 overflow-x-auto">
                             <?php echo $product_specs_editor; ?>
                         </div>
                     </div>
@@ -345,7 +345,7 @@ get_header();
                 <?php if ($product_instructions_editor) : ?>
                     <div class="mb-12">
                         <h2 class="text-2xl font-bold mb-4">ИНСТРУКЦИИ</h2>
-                        <div class="prose max-w-none">
+                        <div class="prose max-w-none overflow-x-auto">
                             <?php echo $product_instructions_editor; ?>
                         </div>
                     </div>
@@ -377,16 +377,31 @@ get_header();
                                 ),
                             ));
                             
+                            
                             if ($related_products->have_posts()) :
+                                // Get user favorites
+                                $user_id = get_current_user_id();
+                                $favorites = $user_id ? get_user_meta($user_id, 'favorite_products', true) : array();
+                                if (!is_array($favorites)) $favorites = array();
+                                
                                 while ($related_products->have_posts()) : $related_products->the_post();
                                     $rel_price = get_field('product_price');
                                     $rel_code = get_field('product_code');
                                     $rel_on_sale = get_field('is_on_sale');
+                                    $rel_is_new = get_field('is_new');
+                                    $rel_id = get_the_ID();
+                                    $is_favorite = in_array($rel_id, $favorites);
                                     ?>
                                     <div class="bg-white rounded-lg p-4 shadow-sm hover:shadow-md border border-gray-100 transition flex flex-col relative group">
-                                        <?php if ($rel_on_sale) : ?>
+                                        <?php if ($rel_is_new) : ?>
+                                            <span class="absolute top-4 left-4 bg-red-500 text-white text-[10px] font-bold px-3 py-1.5 rounded z-10">НОВИНКА</span>
+                                        <?php elseif ($rel_on_sale) : ?>
                                             <span class="absolute top-4 left-4 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded z-10">АКЦИЯ</span>
                                         <?php endif; ?>
+                                        
+                                        <button class="favorite-btn absolute top-4 right-4 transition z-10 hover:text-red-500 <?php echo $is_favorite ? 'text-red-500' : 'text-gray-300'; ?>" data-product-id="<?php echo $rel_id; ?>">
+                                            <i class="<?php echo $is_favorite ? 'fa-solid' : 'fa-regular'; ?> fa-heart text-xl"></i>
+                                        </button>
                                         
                                         <a href="<?php the_permalink(); ?>" class="block">
                                             <?php if (has_post_thumbnail()) : ?>
@@ -427,6 +442,74 @@ get_header();
     ?>
 
 </main><!-- #main -->
+
+<script>
+(function() {
+    'use strict';
+    
+    function initFavoriteButtons() {
+        const favoriteButtons = document.querySelectorAll('.favorite-btn');
+        
+        favoriteButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const productId = this.dataset.productId;
+                const icon = this.querySelector('i');
+                const btn = this; // Save button reference
+                
+                // Send AJAX request
+                fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        action: 'toggle_favorite',
+                        product_id: productId,
+                        nonce: '<?php echo wp_create_nonce('favorite_nonce'); ?>'
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Toggle icon state
+                        if (data.data.is_favorite) {
+                            // Add to favorites
+                            icon.classList.remove('fa-regular');
+                            icon.classList.add('fa-solid');
+                            btn.classList.remove('text-gray-300');
+                            btn.classList.add('text-red-500');
+                        } else {
+                            // Remove from favorites
+                            icon.classList.remove('fa-solid');
+                            icon.classList.add('fa-regular');
+                            btn.classList.remove('text-red-500');
+                            btn.classList.add('text-gray-300');
+                        }
+                    } else {
+                        console.error('Error toggling favorite:', data.data);
+                        <?php if (!is_user_logged_in()): ?>
+                        alert('Пожалуйста, войдите в систему, чтобы добавить товар в избранное');
+                        <?php endif; ?>
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                });
+            });
+        });
+    }
+    
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initFavoriteButtons);
+    } else {
+        initFavoriteButtons();
+    }
+})();
+</script>
 
 <?php
 get_footer();

@@ -13,3 +13,12 @@ html, body {
 	background: #ffffff;
 	background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(106, 152, 217, 1) 40%, rgba(106, 152, 217, 1) 60%, rgba(255, 255, 255, 1) 100%);
 }
+
+/* Utility to hide scrollbar but keep functionality */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
