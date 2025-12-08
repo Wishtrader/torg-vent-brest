@@ -1,4 +1,9 @@
+html, body {
+    background-color: #F7F9FB !important;
+}
+
 .main-button {
+	height: 50px;
 	background: #C9DAFB;
 	background: linear-gradient(135deg, rgba(201, 218, 251, 1) 0%, rgba(57, 122, 210, 1) 40%, rgba(57, 122, 210, 1) 60%, rgba(201, 218, 251, 1) 100%);
 	transition: all 0.3s ease-in-out;

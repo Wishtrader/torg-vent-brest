@@ -743,3 +743,483 @@ function handle_place_order() {
     ));
 }
 add_action('wp_ajax_place_order', 'handle_place_order');
+
+/**
+ * Handle Contact/Consultation Form
+ */
+function handle_send_question() {
+    // Check Nonce
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'consultation_nonce')) {
+        wp_send_json_error(array('message' => 'Ошибка безопасности'));
+        return;
+    }
+
+    $name = sanitize_text_field($_POST['name']);
+    $phone = sanitize_text_field($_POST['phone']);
+    $question = sanitize_textarea_field($_POST['question']);
+
+    if (empty($name) || empty($phone)) {
+        wp_send_json_error(array('message' => 'Заполните обязательные поля'));
+        return;
+    }
+
+    // Send Admin Email
+    $to = get_option('admin_email');
+    $subject = 'Новый вопрос с сайта (Монтаж)';
+    $message = "Имя: $name\nТелефон: $phone\nВопрос: $question";
+    $headers = array('Content-Type: text/plain; charset=UTF-8');
+
+    wp_mail($to, $subject, $message, $headers);
+
+    wp_send_json_success(array('message' => 'Ваша заявка принята! Мы свяжемся с вами в ближайшее время.'));
+}
+add_action('wp_ajax_send_question', 'handle_send_question');
+add_action('wp_ajax_nopriv_send_question', 'handle_send_question');
+
+/**
+ * Register ACF Fields for Installation Page Programmatically
+ */
+add_action('acf/init', 'torg_vent_brest_acf_init');
+function torg_vent_brest_acf_init() {
+
+    acf_add_local_field_group(array(
+        'key' => 'group_installation_page',
+        'title' => 'Настройки страницы Монтаж',
+        'fields' => array(
+            // Intro Section
+            array(
+                'key' => 'field_intro_tab',
+                'label' => 'Главный блок',
+                'type' => 'tab',
+            ),
+            array(
+                'key' => 'field_install_title',
+                'label' => 'Заголовок H1',
+                'name' => 'install_title',
+                'type' => 'text',
+                'default_value' => 'Монтаж систем кондиционирования и вентиляции',
+            ),
+            array(
+                'key' => 'field_install_subtitle',
+                'label' => 'Подзаголовок',
+                'name' => 'install_subtitle',
+                'type' => 'text',
+                'default_value' => 'ВАШ КЛИМАТИЧЕСКИЙ КОМФОРТ — НАША ПРОФЕССИОНАЛЬНАЯ УСТАНОВКА',
+            ),
+            array(
+                'key' => 'field_install_desc',
+                'label' => 'Описание (верх)',
+                'name' => 'install_desc',
+                'type' => 'textarea',
+                'default_value' => 'С 2020 года мы создаем идеальный микроклимат там, где это важно: в уютных квартирах, динамичных офисах и на ответственных промышленных объектах.',
+            ),
+            array(
+                'key' => 'field_install_features_title',
+                'label' => 'Заголовок списка особенностей',
+                'name' => 'install_features_title',
+                'type' => 'text',
+                'default_value' => 'ПОЧЕМУ С НАМИ УДОБНО И НАДЕЖНО:',
+            ),
+            array(
+                'key' => 'field_install_features',
+                'label' => 'Почему с нами удобно (Список)',
+                'name' => 'install_features',
+                'type' => 'wysiwyg',
+                'default_value' => '<strong>Четкость по графику:</strong> Мастер приедет точно в удобное для вас время.<br><strong>Решение «на месте»:</strong> Вместе мы определим лучшее место для установки.<br><strong>Прозрачный процесс:</strong> Вы будете знать все этапы.',
+            ),
+            array(
+                'key' => 'field_install_main_img',
+                'label' => 'Главное изображение',
+                'name' => 'install_main_img',
+                'type' => 'text',
+                'wrapper' => array('class' => 'tvb-image-uploader'), // Marker for JS
+            ),
+            array(
+                'key' => 'field_cta_text',
+                'label' => 'Текст призыва к действию (подпись)',
+                'name' => 'cta_text',
+                'type' => 'text',
+                'default_value' => 'ДЛЯ ТОЧНОГО РАСЧЕТА СТОИМОСТИ ОСТАВЬТЕ ЗАЯВКУ И НАШ МЕНЕДЖЕР СВЯЖЕТСЯ С ВАМИ',
+            ),
+            array(
+                'key' => 'field_cta_btn_text',
+                'label' => 'Текст кнопки (Узнать стоимость)',
+                'name' => 'cta_btn_text',
+                'type' => 'text',
+                'default_value' => 'УЗНАТЬ СТОИМОСТЬ',
+            ),
+            
+            // Portfolio Section
+            array(
+                'key' => 'field_portfolio_tab',
+                'label' => 'Примеры работ',
+                'type' => 'tab',
+            ),
+            array(
+                'key' => 'field_portfolio_title',
+                'label' => 'Заголовок секции портфолио',
+                'name' => 'portfolio_title',
+                'type' => 'text',
+                'default_value' => 'Примеры наших работ',
+            ),
+            // Portfolio Images (Custom Uploader)
+            array(
+                'key' => 'field_portfolio_img_1',
+                'label' => 'Работа 1',
+                'name' => 'portfolio_img_1',
+                'type' => 'text',
+                'wrapper' => array('class' => 'tvb-image-uploader'),
+            ),
+            array(
+                'key' => 'field_portfolio_img_2',
+                'label' => 'Работа 2',
+                'name' => 'portfolio_img_2',
+                'type' => 'text',
+                'wrapper' => array('class' => 'tvb-image-uploader'),
+            ),
+            array(
+                'key' => 'field_portfolio_img_3',
+                'label' => 'Работа 3',
+                'name' => 'portfolio_img_3',
+                'type' => 'text',
+                'wrapper' => array('class' => 'tvb-image-uploader'),
+            ),
+            array(
+                'key' => 'field_portfolio_img_4',
+                'label' => 'Работа 4',
+                'name' => 'portfolio_img_4',
+                'type' => 'text',
+                'wrapper' => array('class' => 'tvb-image-uploader'),
+            ),
+            array(
+                'key' => 'field_portfolio_img_5',
+                'label' => 'Работа 5',
+                'name' => 'portfolio_img_5',
+                'type' => 'text',
+                'wrapper' => array('class' => 'tvb-image-uploader'),
+            ),
+            array(
+                'key' => 'field_portfolio_img_6',
+                'label' => 'Работа 6',
+                'name' => 'portfolio_img_6',
+                'type' => 'text',
+                'wrapper' => array('class' => 'tvb-image-uploader'),
+            ),
+             array(
+                'key' => 'field_portfolio_img_7',
+                'label' => 'Работа 7',
+                'name' => 'portfolio_img_7',
+                'type' => 'text',
+                'wrapper' => array('class' => 'tvb-image-uploader'),
+            ),
+             array(
+                'key' => 'field_portfolio_img_8',
+                'label' => 'Работа 8',
+                'name' => 'portfolio_img_8',
+                'type' => 'text',
+                'wrapper' => array('class' => 'tvb-image-uploader'),
+            ),
+
+            // Contact Section
+            array(
+                'key' => 'field_contact_tab',
+                'label' => 'Блок контактов',
+                'type' => 'tab',
+            ),
+            array(
+                'key' => 'field_contact_title',
+                'label' => 'Заголовок формы',
+                'name' => 'contact_title',
+                'type' => 'text',
+                'default_value' => 'Остались вопросы?',
+            ),
+             array(
+                'key' => 'field_contact_desc',
+                'label' => 'Текст формы',
+                'name' => 'contact_desc',
+                'type' => 'textarea',
+                'default_value' => 'Оставьте ваши контактные данные. Проконсультируем по всем интересующим вопросам.',
+            ),
+            array(
+                'key' => 'field_form_btn_text',
+                'label' => 'Текст кнопки отправки',
+                'name' => 'form_btn_text',
+                'type' => 'text',
+                'default_value' => 'ОТПРАВИТЬ',
+            ),
+            array(
+                'key' => 'field_contact_footer_text',
+                'label' => 'Текст под кнопкой (с контактами)',
+                'name' => 'contact_footer_text',
+                'type' => 'text',
+                'default_value' => 'Позвоните нам или напишите',
+            ),
+            array(
+                'key' => 'field_contact_image',
+                'label' => 'Изображение кондиционера (справа)',
+                'name' => 'contact_image',
+                'type' => 'text',
+                'wrapper' => array('class' => 'tvb-image-uploader'),
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'page_template',
+                    'operator' => '==',
+                    'value' => 'page-installation.php',
+                ),
+            ),
+        ),
+    ));
+    
+}
+
+/**
+ * Force load media scripts in Admin to fix ACF Buttons
+ */
+add_action('admin_enqueue_scripts', 'tvb_force_media_uploader');
+function tvb_force_media_uploader() {
+    wp_enqueue_media();
+}
+
+/**
+ * Custom JS to add Upload Buttons to Text Fields with class 'tvb-image-uploader'
+ */
+add_action('admin_footer', 'tvb_custom_uploader_script');
+function tvb_custom_uploader_script() {
+    ?>
+    <script>
+    jQuery(document).ready(function($){
+        $('.tvb-image-uploader .acf-input').each(function(){
+            var $wrap = $(this);
+            var $input = $wrap.find('input[type="text"]');
+            var $btn = $('<button type="button" class="button" style="margin-top:5px;">Загрузить изображение</button>');
+            
+            $input.after($btn);
+            
+            $btn.click(function(e) {
+                e.preventDefault();
+                var custom_uploader = wp.media({
+                    title: 'Выберите изображение',
+                    button: { text: 'Выбрать' },
+                    multiple: false
+                }).on('select', function() {
+                    var attachment = custom_uploader.state().get('selection').first().toJSON();
+                    $input.val(attachment.url);
+                }).open();
+            });
+        });
+    });
+    </script>
+    <?php
+}
+
+/**
+ * Register Payment & Delivery Page Fields
+ */
+add_action('acf/init', 'tvb_payment_delivery_acf_init');
+function tvb_payment_delivery_acf_init() {
+    acf_add_local_field_group(array(
+        'key' => 'group_payment_delivery',
+        'title' => 'Настройки страницы Оплата и доставка',
+        'fields' => array(
+            // Payment Section
+            array(
+                'key' => 'field_pd_payment_title',
+                'label' => 'Заголовок (Способы оплаты)',
+                'name' => 'pd_payment_title',
+                'type' => 'text',
+                'default_value' => 'СПОСОБЫ ОПЛАТЫ',
+            ),
+            array(
+                'key' => 'field_pd_payment_text',
+                'label' => 'Текст (Способы оплаты)',
+                'name' => 'pd_payment_text',
+                'type' => 'wysiwyg',
+                'default_value' => 'Вы можете оплатить покупку любым удобным способом. Мы принимаем наличные средства при получении оборудования или после выполнения монтажных работ. Также доступна оплата банковскими картами Visa, Mastercard и МИР – онлайн при оформлении заказа или через терминал во время доставки. Для организаций предусмотрен безналичный расчет с выставлением счета. Все платежи осуществляются безопасно, с предоставлением полного пакета документов.',
+            ),
+            
+            // Delivery Section
+            array(
+                'key' => 'field_pd_delivery_title',
+                'label' => 'Заголовок (Условия доставки)',
+                'name' => 'pd_delivery_title',
+                'type' => 'text',
+                'default_value' => 'УСЛОВИЯ ДОСТАВКИ',
+            ),
+            array(
+                'key' => 'field_pd_delivery_text',
+                'label' => 'Текст (Условия доставки)',
+                'name' => 'pd_delivery_text',
+                'type' => 'wysiwyg',
+                'default_value' => '<p>Все условия доставки согласовываются индивидуально с каждым клиентом. Мы доставляем технику строго в оговоренные сроки к месту будущего монтажа. При заказе установки кондиционера в черте города действует бесплатная доставка. В случае необходимости срочной доставки в день заказа, мы постараемся выполнить ваш запрос при наличии оборудования на складе.</p><p>Мы гарантируем бережную транспортировку техники и обязательную проверку оборудования перед установкой. Для корпоративных клиентов предусмотрены индивидуальные условия сотрудничества.</p>',
+            ),
+
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'page_template',
+                    'operator' => '==',
+                    'value' => 'page-payment-delivery.php',
+                ),
+            ),
+        ),
+    ));
+}
+
+/**
+ * Register Return & Exchange Page Fields
+ */
+add_action('acf/init', 'tvb_return_exchange_acf_init');
+function tvb_return_exchange_acf_init() {
+    acf_add_local_field_group(array(
+        'key' => 'group_return_exchange',
+        'title' => 'Настройки страницы Возврат и обмен',
+        'fields' => array(
+            array(
+                'key' => 'field_re_main_title',
+                'label' => 'Заголовок блока',
+                'name' => 're_main_title',
+                'type' => 'text',
+                'default_value' => 'УСЛОВИЯ ВОЗВРАТА И ОБМЕНА',
+            ),
+            array(
+                'key' => 'field_re_main_text',
+                'label' => 'Текст условий',
+                'name' => 're_main_text',
+                'type' => 'wysiwyg',
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'page_template',
+                    'operator' => '==',
+                    'value' => 'page-return-exchange.php',
+                ),
+            ),
+        ),
+    ));
+}
+
+/**
+ * Register Contacts Page Fields
+ */
+add_action('acf/init', 'tvb_contacts_page_acf_init');
+function tvb_contacts_page_acf_init() {
+    acf_add_local_field_group(array(
+        'key' => 'group_contacts_page',
+        'title' => 'Настройки страницы Контакты',
+        'fields' => array(
+            array(
+                'key' => 'field_contacts_phone',
+                'label' => 'Телефон 1',
+                'name' => 'contacts_phone',
+                'type' => 'text',
+                'default_value' => '+375-33-916-66-62',
+            ),
+            array(
+                'key' => 'field_contacts_phone_2',
+                'label' => 'Телефон 2',
+                'name' => 'contacts_phone_2',
+                'type' => 'text',
+                'default_value' => '+375-33-916-66-67',
+            ),
+            array(
+                'key' => 'field_contacts_email',
+                'label' => 'Email',
+                'name' => 'contacts_email',
+                'type' => 'text',
+                'default_value' => 'Torg_vent@mail.ru',
+            ),
+            array(
+                'key' => 'field_contacts_address',
+                'label' => 'Адрес',
+                'name' => 'contacts_address',
+                'type' => 'textarea',
+                'default_value' => 'г.Брест, ул.Пионерская, 85 офис 11',
+                'rows' => 2,
+            ),
+            array(
+                'key' => 'field_contacts_schedule',
+                'label' => 'Режим работы',
+                'name' => 'contacts_schedule',
+                'type' => 'textarea',
+                'default_value' => "пн-пт - с 9:00 до 17:00\nсб - с 9:00 до 14:00\nвс - выходной",
+                'rows' => 4,
+            ),
+            array(
+                'key' => 'field_contacts_map_iframe',
+                'label' => 'Код карты (iframe)',
+                'name' => 'contacts_map_iframe',
+                'type' => 'textarea',
+                'default_value' => '<iframe src="https://yandex.ru/map-widget/v1/?ll=23.730579%2C52.095253&z=17&pt=23.730579,52.095253,pm2blm" width="100%" height="100%" frameborder="0" allowfullscreen="true"></iframe>',
+                'instructions' => 'Вставьте код iframe с Яндекс.Карт или Google Maps. Если пусто - покажется заглушка.',
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'page_template',
+                    'operator' => '==',
+                    'value' => 'page-contacts.php',
+                ),
+            ),
+        ),
+    ));
+}
+
+/**
+ * Register Home Page FAQ Fields
+ */
+add_action('acf/init', 'tvb_home_faq_acf_init');
+function tvb_home_faq_acf_init() {
+    acf_add_local_field_group(array(
+        'key' => 'group_home_faq',
+        'title' => 'FAQ на Главной',
+        'fields' => array(
+            array(
+                'key' => 'field_home_faq_title',
+                'label' => 'Заголовок секции',
+                'name' => 'home_faq_title',
+                'type' => 'text',
+                'default_value' => 'Часто задаваемые вопросы',
+            ),
+            array(
+                'key' => 'field_home_faq_list',
+                'label' => 'Список вопросов',
+                'name' => 'home_faq_list',
+                'type' => 'repeater',
+                'layout' => 'block',
+                'button_label' => 'Добавить вопрос',
+                'sub_fields' => array(
+                    array(
+                        'key' => 'field_home_faq_question',
+                        'label' => 'Вопрос',
+                        'name' => 'question',
+                        'type' => 'text',
+                    ),
+                    array(
+                        'key' => 'field_home_faq_answer',
+                        'label' => 'Ответ',
+                        'name' => 'answer',
+                        'type' => 'textarea',
+                        'rows' => 3,
+                    ),
+                ),
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'page_type',
+                    'operator' => '==',
+                    'value' => 'front_page',
+                ),
+            ),
+        ),
+    ));
+}
+

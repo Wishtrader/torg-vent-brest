@@ -2,59 +2,35 @@
 /**
  * The template for displaying 404 pages (not found)
  *
- * @link https://codex.wordpress.org/Creating_an_Error_404_Page
- *
  * @package torg-vent-brest
  */
 
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+<main id="primary" class="site-main">
+    <section class="py-20 md:py-32 min-h-[70vh] flex flex-col items-center justify-center text-center">
+        <div class="container mx-auto px-4 max-w-[1200px]">
+            
+            <h1 class="lg:text-[36px] md:text-3xl font-bold text-gray-800 mb-6">
+                Страница не найдена
+            </h1>
 
-		<section class="error-404 not-found">
-			<header class="page-header">
-				<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'torg-vent-brest' ); ?></h1>
-			</header><!-- .page-header -->
+            <div class="text-[120px] md:text-[240px] leading-none font-bold text-[#29ABE2] mb-8">
+                404
+            </div>
 
-			<div class="page-content">
-				<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'torg-vent-brest' ); ?></p>
+            <p class="text-[16px] text-gray-600 mb-12 max-w-2xl mx-auto">
+                Неправильно введен адрес или такой страницы не существует
+            </p>
 
-					<?php
-					get_search_form();
+            <a href="<?php echo home_url(); ?>" class="main-button font-bold text-white py-4 px-12 rounded shadow-lg shadow-blue-500/30 transition uppercase tracking-wide">
+                НА ГЛАВНУЮ
+            </a>
 
-					the_widget( 'WP_Widget_Recent_Posts' );
-					?>
-
-					<div class="widget widget_categories">
-						<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'torg-vent-brest' ); ?></h2>
-						<ul>
-							<?php
-							wp_list_categories(
-								array(
-									'orderby'    => 'count',
-									'order'      => 'DESC',
-									'show_count' => 1,
-									'title_li'   => '',
-									'number'     => 10,
-								)
-							);
-							?>
-						</ul>
-					</div><!-- .widget -->
-
-					<?php
-					/* translators: %1$s: smiley */
-					$torg_vent_brest_archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'torg-vent-brest' ), convert_smilies( ':)' ) ) . '</p>';
-					the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$torg_vent_brest_archive_content" );
-
-					the_widget( 'WP_Widget_Tag_Cloud' );
-					?>
-
-			</div><!-- .page-content -->
-		</section><!-- .error-404 -->
-
-	</main><!-- #main -->
+        </div>
+    </section>
+</main>
 
 <?php
 get_footer();

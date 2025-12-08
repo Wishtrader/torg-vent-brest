@@ -9,7 +9,7 @@ get_header();
 ?>
 
 <main id="primary" class="site-main">
-    <section class="py-12 bg-[#F8FAFC] min-h-[60vh] flex flex-col">
+    <section class="py-12 min-h-[60vh] flex flex-col">
         <div class="container mx-auto px-4 max-w-[1200px] flex-grow flex flex-col">
             
             <!-- Breadcrumbs -->

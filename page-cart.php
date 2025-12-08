@@ -20,7 +20,7 @@ $totals = calculate_cart_totals($user_id);
 ?>
 
 <main id="primary" class="site-main">
-    <section class="py-12 bg-gray-50 min-h-screen">
+    <section class="py-12 min-h-screen">
         <div class="container mx-auto px-4 max-w-[1200px]">
             
             <!-- Breadcrumbs -->

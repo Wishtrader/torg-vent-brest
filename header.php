@@ -52,8 +52,8 @@
 <div id="page" class="site flex flex-col min-h-screen font-sans">
     
     <!-- Top Bar -->
-    <div class="bg-white border-b border-gray-200">
-        <div class="container mx-auto px-4 max-w-[1200px] py-2 flex flex-col md:flex-row justify-between items-center text-[16px] text-gray-600 font-medium">
+    <div id="top-bar" class="bg-white border-b border-gray-200">
+        <div class="container mx-auto px-4 max-w-[1240px] py-2 flex flex-col md:flex-row justify-between items-center text-[16px] text-gray-600 font-medium">
             <div class="hidden md:block mb-2 md:mb-0 tracking-[0.01em]">
                 Кондиционеры в Брестской и Гродненской области
             </div>
@@ -88,7 +88,7 @@
 
     <!-- Main Header -->
     <header id="masthead" class="site-header bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4 max-w-[1200px] py-4 flex items-center justify-between">
+        <div class="container mx-auto px-4 max-w-[1240px] py-4 flex items-center justify-between">
             
             <!-- Logo -->
             <div class="site-branding flex-shrink-0 mr-4 lg:mr-[70px]">
@@ -156,10 +156,10 @@
                 } else {
                     // Fallback links matching the image
                     echo '<ul class="flex gap-6 xl:gap-8 text-gray-700 font-medium text-sm list-none m-0 p-0">';
-                    echo '<li><a href="#" class="hover:text-primary text-[16px] transition no-underline text-gray-700">Монтаж</a></li>';
-                    echo '<li><a href="#" class="hover:text-primary text-[16px] transition no-underline text-gray-700">Возврат и обмен</a></li>';
-                    echo '<li><a href="#" class="hover:text-primary text-[16px] transition no-underline text-gray-700">Оплата и доставка</a></li>';
-                    echo '<li><a href="#" class="hover:text-primary text-[16px] transition no-underline text-gray-700">Контакты</a></li>';
+                    echo '<li><a href="' . home_url('/installation') . '" class="hover:text-primary text-[16px] transition no-underline text-gray-700">Монтаж</a></li>';
+                    echo '<li><a href="' . home_url('/return-exchange') . '" class="hover:text-primary text-[16px] transition no-underline text-gray-700">Возврат и обмен</a></li>';
+                    echo '<li><a href="' . home_url('/payment-delivery') . '" class="hover:text-primary text-[16px] transition no-underline text-gray-700">Оплата и доставка</a></li>';
+                    echo '<li><a href="' . home_url('/contacts') . '" class="hover:text-primary text-[16px] transition no-underline text-gray-700">Контакты</a></li>';
                     echo '</ul>';
                 }
                 ?>

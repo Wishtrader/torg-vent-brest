@@ -312,6 +312,18 @@ if( function_exists('acf_add_local_field_group') ):
                 'ui_off_text' => 'Нет',
             ),
             array(
+                'key' => 'field_is_popular',
+                'label' => 'Популярный товар',
+                'name' => 'is_popular',
+                'type' => 'true_false',
+                'instructions' => 'Отметьте, если товар популярный (будет показан в разделе "Популярные товары")',
+                'required' => 0,
+                'default_value' => 0,
+                'ui' => 1,
+                'ui_on_text' => 'Да',
+                'ui_off_text' => 'Нет',
+            ),
+            array(
                 'key' => 'field_product_additional_specs',
                 'label' => 'Дополнительные характеристики',
                 'name' => 'product_additional_specs',

@@ -21,8 +21,8 @@
                 <div class="flex flex-col">
                     <h2 class="text-2xl font-bold mb-8 text-white">БрестКлимат.Бай</h2>
                     <div class="flex flex-col gap-2 text-sm text-gray-300">
-                        <a href="#" class="hover:text-white transition">Политика обработки файлов cookie</a>
-                        <a href="#" class="hover:text-white transition">Согласие на обработку персональных данных</a>
+                        <a href="<?php echo home_url('/cookie-policy'); ?>" class="hover:text-white transition">Политика обработки файлов cookie</a>
+                        <a href="<?php echo home_url('/privacy-policy'); ?>" class="hover:text-white transition">Согласие на обработку персональных данных</a>
                     </div>
                 </div>
 
@@ -112,6 +112,92 @@
         </div>
     </footer><!-- #colophon -->
 </div><!-- #page -->
+
+
+<!-- Cookie Consent -->
+<div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-white shadow-[0_-5px_15px_rgba(0,0,0,0.1)] z-[9999] p-4 py-6 transform translate-y-full transition-transform duration-500 ease-in-out border-t border-gray-100 hidden font-sans">
+    <div class="container mx-auto max-w-[1240px] flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="text-sm text-gray-700 leading-relaxed font-normal md:max-w-3xl text-center md:text-left">
+            Для удобства пользователей сайта используются файлы cookie. Продолжая просмотр этого сайта, вы соглашаетесь на обработку файлов cookie в соответствии с <a href="<?php echo home_url('/cookie-policy'); ?>" class="text-[#1E65C6] hover:text-[#0a4b9c] transition underline decoration-1 underline-offset-2">Политикой обработки файлов cookie</a>
+        </div>
+        <div class="flex gap-4 flex-shrink-0 flex-col sm:flex-row w-full sm:w-auto">
+            <button id="cookie-accept" class="bg-[#1E65C6] hover:bg-[#1553a8] text-white font-bold py-2.5 px-8 rounded text-[13px] uppercase tracking-wide transition shadow-md w-full sm:w-auto hover:shadow-lg">
+                ПРИНЯТЬ
+            </button>
+            <button id="cookie-decline" class="bg-white border text-[#1E65C6] border-[#1E65C6] hover:bg-blue-50 font-bold py-2.5 px-8 rounded text-[13px] uppercase tracking-wide transition w-full sm:w-auto">
+                ОТКЛОНИТЬ
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const banner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('cookie-accept');
+    const declineBtn = document.getElementById('cookie-decline');
+
+    if (!banner || !acceptBtn || !declineBtn) return;
+
+    // Helper functions
+    function setCookie(name, value, days) {
+        let expires = "";
+        if (days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+    }
+
+    function getCookie(name) {
+        const nameEQ = name + "=";
+        const ca = document.cookie.split(';');
+        for(let i=0;i < ca.length;i++) {
+            let c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+
+    function showBanner() {
+        banner.classList.remove('hidden');
+        // Force reflow
+        void banner.offsetWidth;
+        banner.classList.remove('translate-y-full');
+    }
+
+    function hideBanner() {
+        banner.classList.add('translate-y-full');
+        setTimeout(() => {
+            banner.classList.add('hidden');
+        }, 500);
+    }
+
+    // Logic
+    const consent = getCookie('cookie_consent');
+
+    if (!consent) {
+        // Show if no cookie exists (neither accepted nor declined-session)
+        // Delay slightly for UX
+        setTimeout(showBanner, 1000);
+    }
+
+    acceptBtn.addEventListener('click', () => {
+        // Accept: Persistent cookie (1 year)
+        setCookie('cookie_consent', 'accepted', 365);
+        hideBanner();
+    });
+
+    declineBtn.addEventListener('click', () => {
+        // Decline: Session cookie (expires on browser close)
+        // This ensures it appears again on next "visit" (next session)
+        setCookie('cookie_consent', 'declined', null);
+        hideBanner();
+    });
+});
+</script>
 
 <?php wp_footer(); ?>
 
