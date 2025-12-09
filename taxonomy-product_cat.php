@@ -24,7 +24,7 @@ get_header();
     <!-- Page Title -->
     <section class="py-12 bg-white">
         <div class="container mx-auto px-4 max-w-[1200px]">
-            <h1 class="text-4xl font-bold text-center text-gray-800 mb-12"><?php single_term_title(); ?></h1>
+            <h1 class="text-2xl md:text-4xl font-bold text-center text-gray-800 mb-12"><?php single_term_title(); ?></h1>
             
             <!-- Products Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -47,7 +47,7 @@ get_header();
                         }
                         ?>
                         <!-- Product Card -->
-                        <div class="relative bg-white sm:min-h-[460px] sm:min-w-[282px] rounded-lg p-4 shadow-sm hover:shadow-md border border-gray-100 transition flex flex-col relative group">
+                        <div class="relative bg-white min-h-[460px] sm:min-w-[282px] rounded-lg p-4 shadow-sm hover:shadow-md border border-gray-100 transition flex flex-col relative group">
                             
                             <!-- Badge (New takes priority over Sale) -->
                             <?php if ($is_new) : ?>
@@ -153,7 +153,7 @@ get_header();
     <!-- Recommended Products Section -->
     <section class="py-16 bg-gray-50 border-t border-gray-200">
         <div class="container mx-auto px-4 max-w-[1240px]">
-            <h2 class="text-[24px] md:text-[36px] font-bold text-center text-gray-800 mb-12">Рекомендуемые товары</h2>
+            <h2 class="text-2xl md:text-[36px] font-bold text-center text-gray-800 mb-12">Рекомендуемые товары</h2>
              <?php
             // Query for popular products
             $popular_query = new WP_Query(array(

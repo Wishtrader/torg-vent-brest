@@ -97,3 +97,17 @@ POST: Array
 Nonce provided: f37f84d58c
 Expected: f37f84d58c
 Nonce Verify Result: PASS
+--- ADD TO CART ---
+Time: 2025-12-09 10:22:00
+User ID: 1
+Logged In: Yes
+POST: Array
+(
+    [action] => add_to_cart
+    [product_id] => 86
+    [quantity] => 1
+    [nonce] => 980872880c
+)
+Nonce provided: 980872880c
+Expected: 980872880c
+Nonce Verify Result: PASS
